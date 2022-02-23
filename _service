@@ -1,0 +1,27 @@
+<services>
+  <service name="obs_scm" mode="manual">
+    <param name="revision">feature/debian_source_format_3</param>
+    <param name="versionformat">@PARENT_TAG@+@TAG_OFFSET@</param>
+    <param name="url">https://github.com/ila-embsys/obs-build.git</param>
+    <param name="scm">git</param>
+    <param name="extract">dist/build.changes</param>
+    <param name="extract">dist/build.spec</param>
+    <param name="extract">dist/build.dsc</param>
+    <param name="extract">dist/debian.changelog</param>
+    <param name="extract">dist/debian.compat</param>
+    <param name="extract">dist/debian.control</param>
+    <param name="extract">dist/debian.rules</param>
+    <param name="extract">dist/PKGBUILD</param>
+  </service>
+  <service name="tar" mode="buildtime">
+    <param name="obsinfo">obs-build.obsinfo</param>
+    <param name="exclude">.git</param>
+    <param name="exclude">.buildkite</param>
+    <param name="exclude">.github</param>
+  </service>
+  <service name="recompress" mode="buildtime">
+    <param name="compression">gz</param>
+    <param name="file">*.tar</param>
+  </service>
+  <service name="set_version" mode="manual"/>
+</services>
